@@ -3,9 +3,9 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "motion/
 import { Download, Menu, X } from "lucide-react";
 
 const navLinks = [
-  { name: "Work", href: "#work" },
-  { name: "About", href: "#about" },
-  { name: "Contact", href: "#contact" },
+  { name: "Work", href: "/#work" },
+  { name: "About", href: "/#about" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -47,7 +47,7 @@ export default function Navbar() {
           }`}
         >
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group z-50 relative">
+          <a href="/" className="flex items-center gap-3 group z-50 relative">
             <span className="w-2 h-2 rounded-full bg-accent transition-transform duration-500 group-hover:scale-150" />
             <span className="text-xs font-bold tracking-widest uppercase text-ink">Omesh Sidda</span>
           </a>

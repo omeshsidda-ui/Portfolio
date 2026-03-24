@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import { motion, useSpring, useMotionValue } from "motion/react";
 import { ArrowUp } from "lucide-react";
 
@@ -157,14 +158,14 @@ export default function Footer() {
             transition={{ duration: 1, delay: 0.4 }}
             className="flex flex-wrap justify-center md:justify-end items-center gap-6 md:gap-10 text-xs md:text-sm font-medium uppercase tracking-widest text-ink/40"
           >
-            <a href="#" className="hover:text-accent transition-colors duration-300 relative group">
+            <Link to="/privacy" className="hover:text-accent transition-colors duration-300 relative group">
               Privacy Policy
               <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-accent transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-full" />
-            </a>
-            <a href="#" className="hover:text-accent transition-colors duration-300 relative group">
+            </Link>
+            <Link to="/terms" className="hover:text-accent transition-colors duration-300 relative group">
               Terms of Service
               <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-accent transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-full" />
-            </a>
+            </Link>
           </motion.div>
         </div>
 
