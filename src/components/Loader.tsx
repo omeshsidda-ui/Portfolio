@@ -34,7 +34,7 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         >
-          Serhii Korzhov <br /> Portfolio ©{new Date().getFullYear()}
+          Omesh Sidda <br /> Portfolio ©{new Date().getFullYear()}
         </motion.div>
         
         <motion.div
