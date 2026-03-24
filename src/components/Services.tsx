@@ -1,5 +1,5 @@
 import { motion, useMotionTemplate, useMotionValue } from "motion/react";
-import { MouseEvent } from "react";
+import React, { MouseEvent } from "react";
 import { Layout, Smartphone, Globe, Sparkles, Layers, Cpu } from "lucide-react";
 
 // Premium Bento Card with Mouse-Tracking Glow Effect
@@ -60,39 +60,39 @@ function BentoCard({ children, className = "", delay = 0 }: { children: React.Re
 
 const services = [
   {
+    icon: <Cpu className="w-6 h-6" />,
+    title: "Vibecoding",
+    desc: "Harnessing the power of AI to rapidly generate, iterate, and craft elegant code that just feels right.",
+  },
+  {
     icon: <Layout className="w-6 h-6" />,
-    title: "UX/UI Design",
-    desc: "Crafting intuitive, user-centric interfaces that seamlessly blend aesthetics with flawless functionality.",
-  },
-  {
-    icon: <Globe className="w-6 h-6" />,
-    title: "Web Development",
-    desc: "Building robust, scalable, and lightning-fast web applications using cutting-edge modern frameworks.",
-  },
-  {
-    icon: <Smartphone className="w-6 h-6" />,
-    title: "Mobile Experiences",
-    desc: "Designing responsive, app-like mobile experiences that engage users on any device, anywhere.",
-  },
-  {
-    icon: <Sparkles className="w-6 h-6" />,
-    title: "Brand Identity",
-    desc: "Developing cohesive visual systems and brand guidelines that resonate with your target audience.",
+    title: "Web Designing",
+    desc: "Creating visually stunning, modern web interfaces that captivate users and deliver seamless experiences.",
   },
   {
     icon: <Layers className="w-6 h-6" />,
-    title: "Design Systems",
-    desc: "Creating scalable, reusable component libraries to ensure absolute consistency across all products.",
+    title: "UI/UX Design",
+    desc: "Crafting intuitive, user-centric interfaces that seamlessly blend aesthetics with flawless functionality.",
   },
   {
-    icon: <Cpu className="w-6 h-6" />,
-    title: "Prototyping",
-    desc: "Rapidly validating concepts with high-fidelity, interactive prototypes before a single line of code is written.",
+    icon: <Smartphone className="w-6 h-6" />,
+    title: "App Development",
+    desc: "Building robust, lightning-fast mobile and web applications using cutting-edge modern frameworks.",
+  },
+  {
+    icon: <Sparkles className="w-6 h-6" />,
+    title: "AI Integrations",
+    desc: "Implementing intelligent AI features and agents to supercharge product capabilities and user value.",
+  },
+  {
+    icon: <Globe className="w-6 h-6" />,
+    title: "Global Reach",
+    desc: "Deploying highly scalable solutions designed to perform flawlessly for users around the globe.",
   },
 ];
 
 const skills = [
-  "Figma", "Framer", "React", "TypeScript", "Tailwind CSS", "Next.js", "WebGL", "Three.js", "Node.js", "GSAP"
+  "React", "React Native", "Tailwind CSS", "Next.js", "Vibecoding", "Cursor", "AI Tools", "TypeScript", "Node.js", "Figma"
 ];
 
 export default function Services() {
@@ -138,10 +138,10 @@ export default function Services() {
               </div>
               <div>
                 <h3 className="text-2xl md:text-4xl font-light leading-tight text-ink mb-6">
-                  I believe that true digital luxury lies in the invisible details.
+                  I believe in coding at the speed of thought, powered by AI.
                 </h3>
                 <p className="text-lg md:text-xl font-light leading-relaxed text-ink/60 max-w-2xl">
-                  My philosophy centers on creating experiences that don't just look beautiful, but feel intuitive, responsive, and alive. By bridging the gap between aesthetic design and complex engineering, I deliver products that drive measurable business growth while leaving a lasting impression.
+                  My philosophy centers on creating experiences that don't just look beautiful, but feel intuitive, responsive, and alive. By blending vibecoding with strong aesthetic design and engineering, I deliver stunning applications that push the boundaries of modern digital experiences.
                 </p>
               </div>
             </div>

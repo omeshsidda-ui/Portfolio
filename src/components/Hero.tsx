@@ -72,7 +72,7 @@ export default function Hero() {
                   transition={{ duration: 1.2, delay: 2.7, ease: [0.16, 1, 0.3, 1] }}
                   className="font-display text-6xl md:text-8xl lg:text-[7.5rem] leading-none tracking-tight pt-2"
                 >
-                  DIGITAL
+                  VIBECODER
                 </motion.h1>
               </div>
               <div className="overflow-hidden py-2">
@@ -82,7 +82,7 @@ export default function Hero() {
                   transition={{ duration: 1.2, delay: 2.8, ease: [0.16, 1, 0.3, 1] }}
                   className="font-display text-6xl md:text-8xl lg:text-[7.5rem] leading-none tracking-tight text-gradient pt-2"
                 >
-                  EXPERIENCE
+                  & WEB APP
                 </motion.h1>
               </div>
               <div className="overflow-hidden py-2">
@@ -92,7 +92,7 @@ export default function Hero() {
                   transition={{ duration: 1.2, delay: 2.9, ease: [0.16, 1, 0.3, 1] }}
                   className="font-display text-6xl md:text-8xl lg:text-[7.5rem] leading-none tracking-tight pt-2"
                 >
-                  DESIGNER
+                  DEVELOPER
                 </motion.h1>
               </div>
             </div>
@@ -105,7 +105,7 @@ export default function Hero() {
                 transition={{ duration: 1, delay: 3.0, ease: [0.16, 1, 0.3, 1] }}
                 className="text-lg md:text-xl text-ink/60 max-w-md leading-relaxed font-light"
               >
-                Hi, I'm Serhii. I craft intuitive, high-performance digital products that balance aesthetics with business goals.
+                Hi, I'm Omesh. I'm a 17-year-old developer passionate about vibecoding, web designing, and app building.
               </motion.p>
             </div>
 
@@ -147,7 +147,7 @@ export default function Hero() {
                 {/* Image */}
                 <img
                   src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop"
-                  alt="Serhii Korzhov"
+                  alt="Omesh Sidda"
                   className="w-full h-full object-cover grayscale transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] scale-105 group-hover:scale-100 group-hover:grayscale-0"
                 />
                 
@@ -168,7 +168,7 @@ export default function Hero() {
                       transition={{ duration: 1, delay: 3.3, ease: [0.16, 1, 0.3, 1] }}
                       className="text-sm font-medium"
                     >
-                      Kyiv, Ukraine
+                      Globe
                     </motion.span>
                   </div>
                   <div className="flex flex-col gap-1 text-right overflow-hidden">
@@ -178,7 +178,7 @@ export default function Hero() {
                       transition={{ duration: 1, delay: 3.4, ease: [0.16, 1, 0.3, 1] }}
                       className="text-[10px] uppercase tracking-widest text-ink/60 font-bold"
                     >
-                      Experience
+                      Age
                     </motion.span>
                     <motion.span 
                       initial={{ y: 20, opacity: 0 }}
@@ -186,7 +186,7 @@ export default function Hero() {
                       transition={{ duration: 1, delay: 3.5, ease: [0.16, 1, 0.3, 1] }}
                       className="text-sm font-medium"
                     >
-                      4+ Years
+                      17
                     </motion.span>
                   </div>
                 </div>

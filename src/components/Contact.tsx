@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import { ArrowUpRight, Copy, Check } from "lucide-react";
 
@@ -63,14 +63,13 @@ function MagneticCopyButton({ email }: { email: string }) {
 }
 
 const socials = [
-  { name: "Behance", url: "#" },
-  { name: "Instagram", url: "#" },
-  { name: "Facebook", url: "#" },
+  { name: "GitHub", url: "https://github.com/omeshsidda-ui" },
   { name: "LinkedIn", url: "#" },
+  { name: "Twitter", url: "#" },
 ];
 
 export default function Contact() {
-  const email = "sergey28sergey74@gmail.com";
+  const email = "omeshsidda@gmail.com";
 
   return (
     <section id="contact" className="py-24 md:py-40 bg-bg relative z-20 w-full overflow-hidden">
@@ -178,7 +177,7 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Location & Phone */}
+            {/* Location */}
             <div className="flex flex-col gap-8">
               <motion.h4 
                 initial={{ opacity: 0, y: 20 }}
@@ -197,15 +196,8 @@ export default function Contact() {
                 className="flex flex-col gap-6"
               >
                 <p className="text-lg md:text-xl font-light text-ink/80 leading-relaxed">
-                  Kyiv,<br />Ukraine
+                  Globe
                 </p>
-                <a 
-                  href="tel:+380962980099" 
-                  className="group relative inline-flex text-lg md:text-xl font-light text-ink/80 hover:text-accent transition-colors duration-300 w-fit"
-                >
-                  +380962980099
-                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-accent transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-full" />
-                </a>
               </motion.div>
             </div>
 

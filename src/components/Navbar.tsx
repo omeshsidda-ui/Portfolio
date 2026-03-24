@@ -49,7 +49,7 @@ export default function Navbar() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group z-50 relative">
             <span className="w-2 h-2 rounded-full bg-accent transition-transform duration-500 group-hover:scale-150" />
-            <span className="text-xs font-bold tracking-widest uppercase text-ink">Serhii Korzhov</span>
+            <span className="text-xs font-bold tracking-widest uppercase text-ink">Omesh Sidda</span>
           </a>
 
           {/* Desktop Navigation */}

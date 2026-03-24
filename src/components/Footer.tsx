@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion, useSpring, useMotionValue } from "motion/react";
 import { ArrowUp } from "lucide-react";
 
@@ -58,7 +58,7 @@ export default function Footer() {
         second: "2-digit",
         hour12: false,
       };
-      setTime(new Intl.DateTimeFormat("en-US", options).format(now) + " KYIV");
+      setTime(new Intl.DateTimeFormat("en-US", options).format(now) + " LOCAL");
     };
     
     updateTime();
@@ -133,8 +133,8 @@ export default function Footer() {
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col md:flex-row justify-between items-center w-full font-display text-[16vw] md:text-[10vw] leading-[0.8] tracking-tighter uppercase text-ink"
           >
-            <span>SERHII</span>
-            <span className="text-accent md:text-ink md:hover:text-accent transition-colors duration-500">KORZHOV</span>
+            <span>OMESH</span>
+            <span className="text-accent md:text-ink md:hover:text-accent transition-colors duration-500">SIDDA</span>
           </motion.div>
         </div>
 
@@ -147,7 +147,7 @@ export default function Footer() {
             transition={{ duration: 1, delay: 0.3 }}
             className="text-xs md:text-sm font-medium uppercase tracking-widest text-ink/40 text-center md:text-left"
           >
-            © {currentYear} Serhii Korzhov. All rights reserved.
+            © {currentYear} Omesh Sidda. All rights reserved.
           </motion.p>
           
           <motion.div 
