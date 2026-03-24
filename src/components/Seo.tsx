@@ -8,9 +8,9 @@ interface SeoProps {
 }
 
 export default function Seo({ 
-  title = "Serhii Korzhov - UX/UI Designer", 
-  description = "Portfolio of Serhii Korzhov, a UX/UI Designer specializing in clean, modern, and user-centric designs.",
-  name = "Serhii Korzhov",
+  title = "Omesh Sidda - Vibecoder & Developer", 
+  description = "Portfolio of Omesh Sidda, a 17-year-old developer specializing in vibecoding, web designing, and app building.",
+  name = "Omesh Sidda",
   type = "website"
 }: SeoProps) {
   return (
