@@ -5,13 +5,15 @@ interface SeoProps {
   description?: string;
   name?: string;
   type?: string;
+  url?: string;
 }
 
 export default function Seo({ 
   title = "Omesh Sidda - Vibecoder & Developer", 
   description = "Portfolio of Omesh Sidda, a 17-year-old developer specializing in vibecoding, web designing, and app building.",
   name = "Omesh Sidda",
-  type = "website"
+  type = "website",
+  url = "https://omesh-ux-portfolio-ui.web.app/"
 }: SeoProps) {
   return (
     <Helmet>
@@ -23,12 +25,16 @@ export default function Seo({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content={type} />
+      <meta property="og:url" content={url} />
       <meta property="og:site_name" content={name} />
       
       {/* Twitter tags */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
+      
+      {/* Canonical link */}
+      <link rel="canonical" href={url} />
     </Helmet>
   );
 }

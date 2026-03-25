@@ -130,14 +130,14 @@ export default function Process() {
       <div className="max-w-7xl mx-auto w-full px-4 md:px-12">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-end gap-8 border-b border-ink/10 pb-16 mb-16">
-          <div className="overflow-hidden">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 border-b border-ink/10 pb-16 mb-16">
+          <div className="overflow-hidden w-full lg:w-auto shrink-0">
             <motion.h2 
               initial={{ y: "100%" }}
               whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display text-5xl md:text-7xl lg:text-[8rem] leading-none tracking-tight uppercase pt-4"
+              className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-[8rem] leading-none tracking-tight uppercase pt-4"
             >
               Development <br/> <span className="text-ink/40">Process</span>
             </motion.h2>
