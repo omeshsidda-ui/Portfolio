@@ -1,0 +1,7 @@
+# Portfolio agent guide
+
+- This is Omesh Sidda's one-page portfolio. Keep profile claims grounded in information Omesh has provided. The current content covers his B.Tech CSE studies at GPCET and his skills in web development, Linux, AI agents, networking, reverse engineering, and web scraping.
+- Start from the current `main` of [omeshsidda-ui/Portfolio](https://github.com/omeshsidda-ui/Portfolio). This workspace root may be a loose source copy. Check the branch and working tree before editing or building for production. Preserve work in other checkouts, including `.worktree-saadarqam`, and treat `.source-template-saad` as reference material.
+- The app uses React, Vite, and Tailwind. The production build renders `HomePage` to static HTML with `prerender.tsx`, then React hydrates it in the browser. Keep core content in the built HTML. Put browser-only behavior in effects or event handlers and keep the initial render deterministic.
+- For UI changes, check the dock with click, keyboard, and scroll navigation. Check the custom cursor with mouse, touch, and reduced-motion settings. Test audio controls when touching the music player and use iPhone Safari when available.
+- Run `npm run lint` and `npm run build` before shipping code changes. For deployment, build from the intended Git commit and verify the live HTML and assets. See [README.md](README.md) for commands and the release handoff.
