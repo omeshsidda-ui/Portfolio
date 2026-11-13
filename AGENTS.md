@@ -6,17 +6,28 @@
 - Run `git status --short --branch` and `git rev-parse --show-toplevel`. If the current folder is a loose source copy, find the checkout for the requested branch or clone the GitHub repository into a separate folder. Start from current `main` for new work unless Omesh names another branch. Check existing changes before editing.
 - The usual scope is a local change and preview. Merge, push, deploy, or edit DNS only when covered by the current request or an earlier authorization that still applies to the action.
 
-## Choose tools by what the task needs
+## Integrations and preferred tools
 
-| Task | Ways to proceed |
+Use the relevant connected tools proactively when the task calls for them. Omesh should not have to name each plugin in a new chat. Check which capabilities and accounts are available in the current session.
+
+| Task | First choice and fallback |
 | --- | --- |
-| Read or edit the site | Use workspace files and the terminal. Run `npm ci` when dependencies are missing and `npm run dev` to preview. |
-| Inspect GitHub or update a branch | Use Git, `gh` with an existing login, or the GitHub connector. |
-| Test the rendered page | Use an available browser integration or local browser tooling. If visual testing is unavailable, run the build and check the rendered HTML, then report what still needs a browser test. |
-| Deploy to Firebase | Use the Firebase CLI command in the README with an existing authorized login, or a connector that can deploy the intended build to the correct project. |
-| Change DNS or use Search Console | Use the relevant signed-in web dashboard or an authorized connector. If account access is missing, finish independent work and ask for the specific sign-in or action needed. |
+| Read or edit local code | Use workspace files and the terminal. Run `npm ci` when dependencies are missing and `npm run dev` for a local preview. |
+| Inspect or update GitHub | Use the **GitHub plugin** for the remote `omeshsidda-ui/Portfolio` repository, branch comparisons, PRs, and authorized writes. Use Git or `gh` if a connector operation is missing. Check the signed-in account before a push. The Windows terminal's cached GitHub account previously lacked push access, while the connected GitHub plugin succeeded. |
+| Inspect or deploy Firebase Hosting | Use the **Firebase plugin** to locate and confirm the project `omesh-ux-portfolio-ui` and inspect Hosting when supported. If it cannot publish the exact local build or use a preview channel, use the authenticated Firebase CLI workflow in the README. Build the intended Git commit and deploy Hosting only. |
+| Test a preview or the live site | Use the **Browser / computer-use tool** for actual rendered checks. Open the preview, test the relevant interactions at desktop and phone widths, and check for visible errors. For iPhone-specific issues, distinguish mobile emulation from testing Safari on an iPhone. If browser access is unavailable, use an available local browser runner or verify the HTML and assets over HTTP and state what remains untested. |
+| Audit SEO or check indexing | Use the **SEO skill** if installed, Google's Search Central documentation for guidance, and the browser in the signed-in [Search Console domain property](https://search.google.com/search-console?resource_id=sc-domain%3Aomeshsidda.me) for the actual crawl and indexing status. Check the live HTML and assets as well as the source. |
+| Manage custom-domain DNS | Use the browser in signed-in [Namecheap Advanced DNS](https://ap.www.namecheap.com/Domains/DomainControlPanel/omeshsidda.me/advancedns). The **Namecheap plugin** can check availability and pricing, but the available connector has no DNS editor. Preserve the Firebase and Google verification records and email forwarding records when changing website DNS. |
+| Confirm registration or service emails | Use the **Gmail plugin** for a narrowly scoped, read-only lookup when the task needs it. For current registration, DNS, or deployment status, prefer the provider's dashboard or a direct public check. |
 
-A plugin is one way to do the work. When it is unavailable or lacks a needed operation, use another available, authorized route. Keep a real blocker scoped to the step it prevents, and report what you verified and what remains. Keep credentials and verification tokens out of repository files and chat.
+If a preferred tool is missing or lacks the necessary operation, use another available, authorized route. Keep a blocker scoped to the step it prevents. Finish independent work and ask only for the specific sign-in or user action needed. Keep credentials and verification tokens out of repository files and chat.
+
+## Live context
+
+- The primary URL is [omeshsidda.me](https://omeshsidda.me/), hosted on Firebase Hosting in `omesh-ux-portfolio-ui`. The [Firebase URL](https://omesh-ux-portfolio-ui.web.app/) serves the same build and points crawlers to the custom domain through the canonical tag. Namecheap manages DNS and Firebase provides HTTPS.
+- The live redesign includes the floating section dock, vinyl motif, Education, Skills, and an About example about testing on iPhone and connecting the domain. Keep the one-page scope unless Omesh asks to expand it.
+- The custom domain is verified in Search Console. The sitemap was accepted, the homepage was reported indexed, and a fresh crawl was requested on November 13, 2026. Check Search Console for current status and query data. A crawl request does not establish a ranking or mean that Google has processed the latest content.
+- SEO lives in `index.html` and `public/`. Keep the canonical URL, `ProfilePage` / `Person` and `WebSite` markup, `Omesh Sidda` site name, OS vinyl favicon, social image, robots file, and one-page sitemap intact during redesigns.
 
 ## Project notes
 
