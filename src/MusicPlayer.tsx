@@ -20,11 +20,12 @@ function PlayerIcon({ name }: { name: 'play' | 'pause' | 'volume' | 'muted' }) {
 
 export default function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [status, setStatus] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -54,20 +55,23 @@ export default function MusicPlayer() {
       return;
     }
     try {
+      setStatus('Loading audio…');
+      setIsLoading(true);
+      if (audio.error) audio.load();
       await audio.play();
-      setIsPlaying(true);
+      setStatus('');
     } catch {
       setIsPlaying(false);
+      setStatus('Audio could not play. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const seekFromPointer = (clientX: number) => {
+  const seekTo = (seconds: number) => {
     const audio = audioRef.current;
-    const bar = progressRef.current;
-    if (!audio || !bar || !duration) return;
-    const bounds = bar.getBoundingClientRect();
-    const progress = Math.min(1, Math.max(0, (clientX - bounds.left) / bounds.width));
-    audio.currentTime = progress * duration;
+    if (!audio || !duration) return;
+    audio.currentTime = Math.min(duration, Math.max(0, seconds));
     setCurrentTime(audio.currentTime);
   };
 
@@ -78,17 +82,16 @@ export default function MusicPlayer() {
     return `${minutes}:${remainder.toString().padStart(2, '0')}`;
   };
 
-  const progress = duration ? (currentTime / duration) * 100 : 0;
-
   return (
     <div className="music-player-container" aria-label="Music player">
       <audio
         ref={audioRef}
         src="https://raw.githubusercontent.com/SaadArqam/portfolio/main/public/audio/podcast.mp3"
-        preload="metadata"
+        preload="none"
         muted={isMuted}
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
+        onError={() => { setIsPlaying(false); setIsLoading(false); setStatus('Audio is unavailable. Please try again.'); }}
       />
 
       <div className={`vinyl-record${isPlaying ? ' rotating' : ''}`} aria-hidden="true">
@@ -99,35 +102,27 @@ export default function MusicPlayer() {
         <div className="time-display" aria-live="off">
           <span>{formatTime(currentTime)}</span><span>/</span><span>{formatTime(duration)}</span>
         </div>
-        <div
-          ref={progressRef}
-          className="progress-bar"
-          role="slider"
-          tabIndex={0}
+        <input
+          type="range"
+          className="track-progress"
           aria-label="Track progress"
-          aria-valuemin={0}
-          aria-valuemax={Math.floor(duration)}
-          aria-valuenow={Math.floor(currentTime)}
-          onClick={(event) => seekFromPointer(event.clientX)}
-          onKeyDown={(event) => {
-            if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
-            event.preventDefault();
-            const audio = audioRef.current;
-            if (!audio || !duration) return;
-            audio.currentTime = Math.min(duration, Math.max(0, audio.currentTime + (event.key === 'ArrowRight' ? 5 : -5)));
-            setCurrentTime(audio.currentTime);
-          }}
-        >
-          <div className="progress-filled" style={{ width: `${progress}%` }} />
-        </div>
+          aria-valuetext={`${formatTime(currentTime)} of ${formatTime(duration)}`}
+          min={0}
+          max={duration || 1}
+          step={1}
+          value={currentTime}
+          disabled={!duration}
+          onChange={(event) => seekTo(Number(event.target.value))}
+        />
         <div className="controls">
-          <button type="button" onClick={togglePlay} className="play-pause-btn" aria-label={isPlaying ? 'Pause music' : 'Play music'}>
+          <button type="button" onClick={togglePlay} disabled={isLoading} className="play-pause-btn" aria-label={isLoading ? 'Loading music' : isPlaying ? 'Pause music' : 'Play music'}>
             <PlayerIcon name={isPlaying ? 'pause' : 'play'} />
           </button>
           <button type="button" onClick={() => setIsMuted((muted) => !muted)} className="mute-btn" aria-label={isMuted ? 'Unmute music' : 'Mute music'} aria-pressed={isMuted}>
             <PlayerIcon name={isMuted ? 'muted' : 'volume'} />
           </button>
         </div>
+        <p className="player-status" role="status">{status || (duration ? '' : 'Press play to listen')}</p>
       </div>
     </div>
   );
