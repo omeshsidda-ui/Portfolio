@@ -2,8 +2,6 @@ import React, { useRef, useState } from 'react';
 import HeroParticles from './HeroParticles';
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'motion/react';
 
-const EASE_CURVE: [number, number, number, number] = [0.22, 1, 0.36, 1];
-
 const skills = [
   { title: 'Web development', description: 'I build web apps and turn ideas into interfaces people can use.' },
   { title: 'Headless Linux servers', description: 'I manage remote Linux servers and use AI agents to help with routine administration.' },
@@ -166,7 +164,6 @@ function HeroIdCard() {
 }
 
 export default function HomePage() {
-  const reducedMotion = useReducedMotion();
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <header className="absolute top-0 z-20 w-full px-6 py-6 md:px-12 md:py-8">
@@ -216,16 +213,12 @@ export default function HomePage() {
             <span className="text-type__cursor">|</span>
           </h2>
 
-          <motion.p
-            initial={reducedMotion ? false : { opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, ease: EASE_CURVE }}
+          <p
             className="text-lg md:text-2xl lg:text-3xl font-medium text-foreground/90 leading-relaxed max-w-4xl mx-auto mb-12 md:mb-0"
           >
-            I’m Omesh, a first-year B.Tech student in Computer Science and Engineering at GPCET.
+            I’m Omesh Sidda, a first-year B.Tech student in Computer Science and Engineering at GPCET.
             Outside class, I build web apps and experiment with AI agents on remote Linux servers.
-          </motion.p>
+          </p>
         </div>
 
           <a href="mailto:omeshsidda@gmail.com" className="mt-10 inline-flex rounded-full bg-primary px-8 py-4 font-bold text-primary-foreground">
