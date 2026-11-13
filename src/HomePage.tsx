@@ -1,262 +1,179 @@
-import React, { useRef, useState } from 'react';
-import HeroParticles from './HeroParticles';
-import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'motion/react';
+import { useEffect, useState } from 'react';
+import CustomCursor from './CustomCursor';
 
 const skills = [
-  { title: 'Web development', description: 'I build web apps and turn ideas into interfaces people can use.' },
-  { title: 'Headless Linux servers', description: 'I manage remote Linux servers and use AI agents to help with routine administration.' },
-  { title: 'Hermes agents', description: 'I run Hermes agents on remote servers and use them in my day-to-day workflows.' },
-  { title: 'Networking', description: 'I work with network configuration and troubleshoot connectivity.' },
-  { title: 'Reverse engineering', description: 'I study how apps work by examining their behavior and structure.' },
-  { title: 'Web scraping', description: 'I extract information from web pages and turn it into structured data.' },
+  { title: 'Web development', description: 'I build web apps and turn ideas into interfaces people can use.', icon: 'code' },
+  { title: 'Headless Linux servers', description: 'I manage remote Linux servers and use AI agents to help with routine administration.', icon: 'server' },
+  { title: 'Hermes agents', description: 'I run Hermes agents on remote servers and use them in my day-to-day workflows.', icon: 'spark' },
+  { title: 'Networking', description: 'I work with network configuration and troubleshoot connectivity.', icon: 'network' },
+  { title: 'Reverse engineering', description: 'I study how apps work by examining their behavior and structure.', icon: 'search' },
+  { title: 'Web scraping', description: 'I extract information from web pages and turn it into structured data.', icon: 'database' },
 ];
 
-function HeroIdCard() {
-  const reducedMotion = useReducedMotion();
-  const cardRef = useRef<HTMLButtonElement>(null);
-  const [isFlipped, setIsFlipped] = useState(false);
-
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springConfig = { stiffness: 300, damping: 20, mass: 0.8 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
-
-  const rotateXNum = useTransform(smoothY, [-0.5, 0.5], [16, -16]);
-  const rotateYMouse = useTransform(smoothX, [-0.5, 0.5], [-16, 16]);
-  const flipSpring = useSpring(0, { stiffness: 200, damping: 25 });
-
-  const rotateX = useTransform(rotateXNum, (v) => `${v}deg`);
-  const rotateY = useTransform([rotateYMouse, flipSpring], ([m, f]) => {
-    const mVal = typeof m === 'number' ? m : 0;
-    const fVal = typeof f === 'number' ? f : 0;
-    return `${mVal + fVal}deg`;
-  });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (reducedMotion || !cardRef.current || window.innerWidth < 768) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const relX = (e.clientX - rect.left - rect.width / 2) / rect.width;
-    const relY = (e.clientY - rect.top - rect.height / 2) / rect.height;
-    mouseX.set(relX);
-    mouseY.set(relY);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
-  const handleFlip = () => {
-    const next = !isFlipped;
-    setIsFlipped(next);
-    flipSpring.set(next ? 180 : 0);
-  };
-
+function CloudIcon({ className = '' }: { className?: string }) {
   return (
-    <motion.button
-      ref={cardRef}
-      type="button"
-      onClick={handleFlip}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      aria-label={isFlipped ? 'Flip ID Card to Front' : 'Flip ID Card to System Profile'}
-      aria-pressed={isFlipped}
-      style={{
-        transformStyle: 'preserve-3d',
-        perspective: '1000px',
-        rotateX: reducedMotion ? 0 : rotateX,
-        rotateY: reducedMotion ? (isFlipped ? 180 : 0) : rotateY,
-        willChange: 'transform',
-      }}
-      whileHover={reducedMotion ? undefined : { scale: 1.02 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-      className="relative w-full h-full rounded-3xl cursor-pointer group bg-neutral-900 border border-neutral-800 p-1.5 shadow-2xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900"
-    >
-      <div
-        className="relative w-full h-full"
-        style={{ transformStyle: 'preserve-3d', WebkitTransformStyle: 'preserve-3d' }}
-      >
-        {/* Front Face */}
-        <div
-          className="absolute inset-0 w-full h-full"
-          style={{
-            transform: 'rotateY(0deg)',
-            backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden',
-            zIndex: isFlipped ? 10 : 20,
-          }}
-        >
-          <div className="relative w-full h-full rounded-[20px] overflow-hidden bg-[#0a0a0a] border border-white/10">
-            <div className="absolute inset-0 z-10 flex items-end justify-center group-hover:scale-[1.02] transition-transform duration-500">
-              <div className="relative w-full h-full">
-                <div aria-hidden="true" className="absolute inset-0 grid place-items-center bg-neutral-800 text-[clamp(5rem,16vh,10rem)] font-black tracking-tighter text-white/80">OS</div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
-              </div>
-            </div>
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M20 16.2A4.5 4.5 0 0 0 18.6 7.4a6 6 0 0 0-11.5 1.4A4 4 0 0 0 7 17h12.5" />
+    </svg>
+  );
+}
 
-            <div className="absolute bottom-0 inset-x-0 z-40 p-6 flex flex-col justify-end pb-8 pointer-events-none">
-              <div className="font-sans text-3xl md:text-4xl font-black tracking-tight text-white leading-[1.05] drop-shadow-lg">
-                <div className="font-mono text-white/85 text-[10px] md:text-[11px] tracking-[0.25em] mb-3 font-semibold uppercase">
-                  STUDENT · PORTFOLIO
-                </div>
-                <div>OMESH</div>
-                <div>SIDDA</div>
-                <div className="mt-3 flex items-center gap-2 font-mono text-white/70 text-[10px] tracking-[0.2em] font-medium uppercase">
-                  <span className="inline-block w-6 h-px bg-white/60" />
-                  TAP TO FLIP
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+function Symbol({ name, className = 'h-5 w-5' }: { name: string; className?: string }) {
+  const common = { className, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true as const };
+  switch (name) {
+    case 'home': return <svg {...common}><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z" /></svg>;
+    case 'user': return <svg {...common}><circle cx="12" cy="8" r="4" /><path d="M5 21v-1a7 7 0 0 1 14 0v1" /></svg>;
+    case 'education': return <svg {...common}><path d="m2 9 10-5 10 5-10 5z" /><path d="M6 11v5c3.5 3 8.5 3 12 0v-5M22 9v6" /></svg>;
+    case 'code': return <svg {...common}><path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14" /></svg>;
+    case 'server': return <svg {...common}><rect x="3" y="4" width="18" height="7" rx="1.5" /><rect x="3" y="13" width="18" height="7" rx="1.5" /><path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6" /></svg>;
+    case 'spark': return <svg {...common}><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z" /></svg>;
+    case 'network': return <svg {...common}><circle cx="12" cy="5" r="2.5" /><circle cx="5" cy="19" r="2.5" /><circle cx="19" cy="19" r="2.5" /><path d="m10.8 7.2-4.5 9.6m6.9-9.6 4.5 9.6M7.5 19h9" /></svg>;
+    case 'search': return <svg {...common}><circle cx="10.8" cy="10.8" r="6.8" /><path d="m16 16 4.5 4.5" /></svg>;
+    case 'database': return <svg {...common}><ellipse cx="12" cy="5" rx="8" ry="3" /><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" /></svg>;
+    case 'mail': return <svg {...common}><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></svg>;
+    default: return <svg {...common}><circle cx="12" cy="12" r="9" /></svg>;
+  }
+}
 
-        {/* Back Face — System Profile */}
-        <div
-          className="absolute inset-0 w-full h-full"
-          style={{
-            transform: 'rotateY(180deg)',
-            backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden',
-            zIndex: isFlipped ? 20 : 10,
-          }}
-        >
-          <div className="relative w-full h-full bg-[#050505] rounded-[20px] overflow-hidden border border-white/10 p-6 flex flex-col">
-            <div
-              className="absolute inset-0 opacity-[0.03]"
-              style={{
-                backgroundImage:
-                  'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)',
-                backgroundSize: '20px 20px',
-              }}
-            />
+function IndiaTime() {
+  const [time, setTime] = useState('');
+  useEffect(() => {
+    const update = () => setTime(new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: true }).format(new Date()));
+    update();
+    const interval = window.setInterval(update, 60_000);
+    return () => window.clearInterval(interval);
+  }, []);
+  return <span className="time-display" aria-label={time ? `India time ${time}` : 'India time'}>{time || 'IST'}</span>;
+}
 
-            <div className="flex justify-between items-center border-b border-white/10 pb-4 z-20">
-              <span className="text-[10px] font-mono tracking-widest text-white/50">
-                PROFILE
-              </span>
-              <div className="px-2 py-0.5 border border-white/20 text-[8px] font-mono tracking-widest text-white/70">
-                TAP TO FLIP
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-3.5 mt-5 z-20 flex-grow">
-              <div>
-                <p className="text-[8px] font-mono tracking-widest text-white/40 mb-0.5 uppercase">
-                  IDENTITY
-                </p>
-                <p className="text-xs font-sans font-bold tracking-widest text-white uppercase">
-                  OMESH SIDDA
-                </p>
-              </div>
-
-              <div>
-                <p className="text-[8px] font-mono tracking-widest text-white/40 mb-0.5 uppercase">Interests</p>
-                <p className="text-sm font-semibold text-white">Web apps, Linux servers, and AI agents</p>
-              </div>
-            </div>
-          </div>
-        </div>
+function ProfileRecord() {
+  return (
+    <div className="music-player-container profile-record">
+      <div className="vinyl-record" aria-hidden="true">
+        <div className="vinyl-label"><span className="vinyl-monogram">OS</span></div>
       </div>
-    </motion.button>
+      <div className="record-copy">
+        <p className="track-name">Omesh Sidda</p>
+        <p>Web apps · Linux servers · AI agents</p>
+      </div>
+    </div>
+  );
+}
+
+function FloatingDock() {
+  const items = [
+    { id: 'home', label: 'Home', icon: 'home' },
+    { id: 'about', label: 'About', icon: 'user' },
+    { id: 'education', label: 'Education', icon: 'education' },
+    { id: 'skills', label: 'Skills', icon: 'code' },
+  ];
+  return (
+    <nav aria-label="Page sections" className="floating-dock">
+      {items.map((item, index) => (
+        <a key={item.id} href={`#${item.id}`} aria-label={item.label} title={item.label} className={`dock-icon${index === 0 ? ' dock-icon-active' : ''}`}>
+          <Symbol name={item.icon} />
+        </a>
+      ))}
+    </nav>
   );
 }
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <header className="absolute top-0 z-20 w-full px-6 py-6 md:px-12 md:py-8">
-        <nav aria-label="Main navigation" className="flex items-center justify-between gap-4">
-          <a href="#home" className="text-sm font-bold tracking-widest uppercase sm:text-lg">Omesh Sidda</a>
-          <div className="flex items-center gap-4 text-sm font-medium">
-            <a href="#about">About</a>
-            <a href="mailto:omeshsidda@gmail.com" className="rounded-full bg-primary px-4 py-2 text-primary-foreground">Contact</a>
-          </div>
-        </nav>
-      </header>
-      <main>
-      <section
-        id="home"
-        className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pb-[120px] pt-[80px]"
-      >
-        <HeroParticles />
-        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none overflow-hidden z-0 py-24 md:py-0">
-          <h1 className="text-[clamp(3rem,13vw,8rem)] md:text-[clamp(6rem,min(15vw,35vh),20rem)] font-black text-foreground/60 whitespace-nowrap tracking-tighter leading-[0.8] select-none motion-safe:animate-[pulse_3s_ease-in-out_infinite]">
-            OMESH SIDDA
-          </h1>
-        </div>
+    <div className="min-h-screen bg-white text-black relative overflow-hidden">
+      <div aria-hidden="true" className="cloud-field">
+        <CloudIcon className="cloud cloud-a" />
+        <CloudIcon className="cloud cloud-b" />
+        <CloudIcon className="cloud cloud-c" />
+        <CloudIcon className="cloud cloud-d" />
+        <CloudIcon className="cloud cloud-e" />
+      </div>
+      <CustomCursor />
 
-        {/* Center Hanging 3D ID Card */}
-        <div className="relative z-10 flex flex-col items-center mt-12">
-          <div className="origin-top transition-all duration-500 ease-out flex justify-center">
-            <div className="w-[85vw] max-w-[350px] aspect-[2/3] md:max-w-none md:w-auto md:h-[65vh] md:min-h-[450px] md:max-h-[800px] 2xl:h-[70vh]">
-              <HeroIdCard />
+      <div className="flex justify-center w-full pt-6 px-4 sm:px-0 relative z-10">
+        <div className="w-full sm:w-[80%] border border-black rounded-lg bg-white/60 backdrop-blur-sm">
+          <header className="flex flex-col sm:flex-row justify-between items-center p-4 sm:p-6">
+            <a href="#home" className="site-wordmark text-xl sm:text-2xl font-black uppercase mb-2 sm:mb-0">Omesh Sidda</a>
+            <div className="flex items-center gap-3 sm:gap-4">
+              <span className="hidden sm:inline header-study">B.Tech · CSE · GPCET</span>
+              <span className="header-divider" aria-hidden="true" />
+              <IndiaTime />
+              <CloudIcon className="h-5 w-5 sm:h-6 sm:w-6 text-gray-500" />
+            </div>
+          </header>
+        </div>
+      </div>
+
+      <main className="relative z-10">
+        <section id="home" aria-labelledby="hero-title" className="grid grid-cols-1 md:grid-cols-5 items-center px-6 sm:px-12 md:px-24 lg:px-32 min-h-[80vh] relative pt-10 sm:pt-0">
+          <div className="md:col-span-3">
+            <h1 id="hero-title" className="hero-title text-5xl sm:text-7xl md:text-8xl leading-[0.9] mb-4 sm:mb-6">OMESH<br />SIDDA</h1>
+            <p className="hero-statement text-2xl sm:text-3xl md:text-4xl mb-6 sm:mb-8">I build web apps and work with Linux servers.</p>
+            <p className="hero-support text-lg sm:text-xl mb-8 sm:mb-10">Web apps, Linux servers, and AI agents.</p>
+            <div className="flex flex-wrap gap-3 sm:gap-4">
+              <a href="#education" className="rounded-button hero-button px-6 sm:px-8 md:px-10 py-2.5 sm:py-3">Education</a>
+              <a href="mailto:omeshsidda@gmail.com" className="rounded-button hero-button px-6 sm:px-8 md:px-10 py-2.5 sm:py-3">Get in touch</a>
             </div>
           </div>
-        </div>
 
-        <a href="#about" className="absolute bottom-6 md:bottom-10 flex flex-col items-center gap-2 text-foreground font-mono">
-          <span className="text-[10px] tracking-[0.3em] font-bold">SCROLL</span>
-          <span aria-hidden="true" className="w-px h-8 md:h-12 bg-foreground" />
-        </a>
-      </section>
-
-
-
-      <section id="about" className="relative pt-16 pb-32 md:py-32 px-4 md:px-6 overflow-hidden bg-background">
-        <div className="max-w-6xl mx-auto relative z-10 text-center">
-          <h2 className="text-type text-3xl md:text-5xl lg:text-7xl font-black text-primary tracking-tight leading-[1.05] mb-10 inline-block">
-            <span className="text-type__content">
-              I build web apps and work with Linux servers.
-            </span>
-            <span className="text-type__cursor">|</span>
-          </h2>
-
-          <p
-            className="text-lg md:text-2xl lg:text-3xl font-medium text-foreground/90 leading-relaxed max-w-4xl mx-auto mb-12 md:mb-0"
-          >
-            I’m Omesh Sidda, a first-year B.Tech student in Computer Science and Engineering at GPCET.
-            Outside class, I build web apps and experiment with AI agents on remote Linux servers.
-          </p>
-        </div>
-
-          <a href="mailto:omeshsidda@gmail.com" className="mt-10 inline-flex rounded-full bg-primary px-8 py-4 font-bold text-primary-foreground">
-            Get in touch <span aria-hidden="true" className="ml-2">↗</span>
-          </a>
-      </section>
-
-      <section id="education" aria-labelledby="education-title" className="border-t border-white/10 bg-[#050505] px-6 py-16 text-white md:px-12 md:py-24">
-        <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1fr_2fr] md:gap-12">
-          <h2 id="education-title" className="text-4xl font-black tracking-tight md:text-5xl">Education</h2>
-          <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.08] to-white/[0.02] p-6 md:p-8">
-            <p className="mb-3 font-mono text-xs font-bold uppercase tracking-widest text-white/70">B.Tech · First year</p>
-            <h3 className="text-2xl font-bold tracking-tight md:text-3xl">Computer Science and Engineering</h3>
-            <p className="mt-3 text-white/70">G Pullaiah College of Engineering and Technology (GPCET), Kurnool</p>
-            <a className="mt-5 inline-block font-semibold underline underline-offset-4" href="https://www.gpcet.ac.in/cse_home/">Visit the CSE department <span aria-hidden="true">↗</span></a>
+          <div className="md:col-span-2 flex justify-center items-center mt-12 md:mt-0">
+            <ProfileRecord />
           </div>
-        </div>
-      </section>
 
-      <section id="skills" aria-labelledby="skills-title" className="border-t border-white/10 bg-[#050505] px-6 py-16 text-white md:px-12 md:py-24">
-        <div className="mx-auto max-w-6xl">
-          <h2 id="skills-title" className="mb-8 text-4xl font-black tracking-tight md:text-5xl">Skills</h2>
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {skills.map(({ title, description }) => (
-              <li key={title} className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.08] to-white/[0.02] p-6">
-                <h3 className="mb-2 text-xl font-bold tracking-tight">{title}</h3>
-                <p className="leading-relaxed text-white/70">{description}</p>
+          <div aria-hidden="true" className="absolute top-2 right-6 sm:top-12 sm:right-8 md:top-24 md:right-24 bg-white rounded-full p-0.5 sm:p-1 border border-black">
+            <div className="rounded-full bg-black text-white p-1.5 sm:p-2 flex items-center justify-center w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] md:w-[60px] md:h-[60px] text-sm sm:text-base md:text-lg">★</div>
+          </div>
+        </section>
+
+        <section id="about" aria-labelledby="about-title" className="portfolio-section px-6 sm:px-12 md:px-24 lg:px-32 py-16 md:py-24">
+          <div className="section-intro">
+            <p className="section-kicker">About</p>
+            <h2 id="about-title" className="section-title">A little about me</h2>
+          </div>
+          <div className="about-card">
+            <div className="section-icon"><Symbol name="user" className="h-8 w-8" /></div>
+            <p>I’m Omesh Sidda, a first-year B.Tech student in Computer Science and Engineering at GPCET. Outside class, I build web apps and experiment with AI agents on remote Linux servers.</p>
+          </div>
+        </section>
+
+        <section id="education" aria-labelledby="education-title" className="portfolio-section px-6 sm:px-12 md:px-24 lg:px-32 py-16 md:py-24">
+          <div className="section-intro">
+            <p className="section-kicker">Education</p>
+            <h2 id="education-title" className="section-title">Computer Science and Engineering</h2>
+          </div>
+          <article className="education-card">
+            <div className="section-icon"><Symbol name="education" className="h-8 w-8" /></div>
+            <div>
+              <p className="education-level">B.Tech <span>·</span> First year</p>
+              <h3>Computer Science and Engineering</h3>
+              <p className="education-school">G Pullaiah College of Engineering and Technology (GPCET), Kurnool</p>
+              <a className="department-link" href="https://www.gpcet.ac.in/cse_home/">Visit the CSE department <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+        </section>
+
+        <section id="skills" aria-labelledby="skills-title" className="portfolio-section px-6 sm:px-12 md:px-24 lg:px-32 py-16 md:py-24">
+          <div className="section-intro">
+            <p className="section-kicker">Toolbox</p>
+            <h2 id="skills-title" className="section-title">Skills</h2>
+          </div>
+          <ul className="skills-grid">
+            {skills.map(({ title, description, icon }) => (
+              <li className="skill-card" key={title}>
+                <span className="skill-icon"><Symbol name={icon} className="h-6 w-6" /></span>
+                <div><h3>{title}</h3><p>{description}</p></div>
               </li>
             ))}
           </ul>
-        </div>
-      </section>
-
+        </section>
       </main>
-      <footer className="flex justify-between border-t px-6 py-6 text-sm md:px-12">
-        <a href="#home">Omesh Sidda</a>
-        <a href="https://github.com/omeshsidda-ui">GitHub ↗</a>
+
+      <footer className="site-footer px-6 sm:px-12 md:px-24 lg:px-32 py-6">
+        <a href="#home" className="site-wordmark">Omesh Sidda</a>
+        <a href="https://github.com/omeshsidda-ui">GitHub <span aria-hidden="true">↗</span></a>
       </footer>
+      <FloatingDock />
     </div>
   );
 }
+
