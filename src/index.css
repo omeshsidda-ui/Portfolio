@@ -137,7 +137,7 @@
 
 .hero-section { position: relative; display: flex; min-height: min(780px, 100svh); min-height: max(620px, 100svh); align-items: center; overflow: hidden; background: var(--ink); color: white; padding: 112px clamp(24px, 5.5vw, 88px) 96px; }
 .hero-content { display: grid; width: min(100%, 1440px); margin: auto; grid-template-columns: minmax(0, 1.25fr) minmax(250px, .72fr); align-items: center; gap: clamp(28px, 7vw, 112px); }
-.hero-name { margin: 0 0 0 -.045em; font-size: clamp(5.1rem, 14.2vw, 14.5rem); font-weight: 900; letter-spacing: -.095em; line-height: .76; }
+.hero-name { margin: 0 0 0 -.025em; font-size: clamp(4.8rem, 12.8vw, 13rem); font-weight: 900; letter-spacing: -.025em; line-height: .82; }
 .hero-card-wrap { width: min(100%, 360px); aspect-ratio: 2 / 2.75; justify-self: center; perspective: 1000px; }
 .identity-card { border: 0; padding: 0; background: transparent; }
 .identity-face { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; border-radius: 4px; background: var(--paper); color: var(--ink); padding: 22px; }
@@ -187,7 +187,7 @@
   .portfolio-nav-links { gap: 18px; }
   .hero-section { min-height: max(760px, 100svh); align-items: flex-start; padding-top: 138px; padding-bottom: 90px; }
   .hero-content { grid-template-columns: 1fr; justify-items: center; gap: 38px; }
-  .hero-name { justify-self: start; font-size: clamp(5.2rem, 18vw, 9rem); }
+  .hero-name { justify-self: start; font-size: clamp(4.8rem, 16vw, 8.2rem); }
   .hero-card-wrap { width: min(66vw, 290px); }
   .about-layout { grid-template-columns: 1fr; gap: 32px; }
   .about-section { min-height: auto; }
@@ -202,7 +202,7 @@
 @media (max-width: 420px) {
   .portfolio-brand { font-size: 13px; }
   .portfolio-nav-links { gap: 13px; font-size: 13px; }
-  .hero-name { font-size: clamp(4.7rem, 19vw, 6.1rem); }
+  .hero-name { font-size: clamp(4.35rem, 17vw, 5.8rem); }
   .hero-card-wrap { width: min(72vw, 270px); }
   .identity-face { padding: 18px; }
   .about-title { font-size: clamp(2.7rem, 13vw, 3.8rem); }
@@ -211,3 +211,4 @@
 @media (prefers-reduced-motion: reduce) {
   .portfolio-nav a, .portfolio-footer a, .lime-link { transition: none; }
 }
+
