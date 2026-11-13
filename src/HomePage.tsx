@@ -155,7 +155,11 @@ export default function HomePage() {
           </div>
           <div className="about-card">
             <div className="section-icon"><Symbol name="user" className="h-8 w-8" /></div>
-            <p>I’m Omesh Sidda, a first-year B.Tech student in Computer Science and Engineering at GPCET. Outside class, I build web apps and experiment with AI agents on remote Linux servers.</p>
+            <p>I’m Omesh Sidda, a first-year B.Tech student in Computer Science and Engineering at GPCET. Outside class, I build web apps and experiment with AI agents on remote Linux servers.
+              <br />
+              <br />
+              This portfolio is one of the ways I learn web development. I tested the layout on my iPhone and learned how to connect my own domain to Firebase Hosting.
+            </p>
           </div>
         </section>
 
