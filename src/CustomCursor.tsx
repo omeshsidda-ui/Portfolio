@@ -9,17 +9,24 @@ export default function CustomCursor() {
     if (!finePointer.matches) return;
 
     const root = document.documentElement;
-    root.classList.add('custom-cursor-enabled');
     const onMove = (event: PointerEvent) => {
+      if (event.pointerType === 'touch') return;
       for (const cursor of [outer.current, inner.current]) {
         if (!cursor) continue;
         cursor.style.left = `${event.clientX}px`;
         cursor.style.top = `${event.clientY}px`;
         cursor.style.opacity = '1';
       }
+      root.classList.add('custom-cursor-enabled');
     };
     const onDown = () => root.classList.add('custom-cursor-clicked');
     const onUp = () => root.classList.remove('custom-cursor-clicked');
+    const onLeave = () => {
+      root.classList.remove('custom-cursor-enabled', 'custom-cursor-clicked', 'custom-cursor-hovered');
+      for (const cursor of [outer.current, inner.current]) {
+        if (cursor) cursor.style.opacity = '0';
+      }
+    };
     const onOver = (event: PointerEvent) => {
       if (event.target instanceof Element && event.target.closest('a, button, input, textarea, select, [role="button"]')) root.classList.add('custom-cursor-hovered');
     };
@@ -30,6 +37,8 @@ export default function CustomCursor() {
     window.addEventListener('pointermove', onMove);
     window.addEventListener('pointerdown', onDown);
     window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onUp);
+    window.addEventListener('pointerleave', onLeave);
     document.addEventListener('pointerover', onOver);
     document.addEventListener('pointerout', onOut);
     return () => {
@@ -37,6 +46,8 @@ export default function CustomCursor() {
       window.removeEventListener('pointermove', onMove);
       window.removeEventListener('pointerdown', onDown);
       window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('pointercancel', onUp);
+      window.removeEventListener('pointerleave', onLeave);
       document.removeEventListener('pointerover', onOver);
       document.removeEventListener('pointerout', onOut);
     };
