@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readdir } from 'node:fs/promises';
 
-const origin = 'http://127.0.0.1:5000';
+const origin = new URL(process.argv[2] ?? 'http://127.0.0.1:5000').origin;
 const homepage = await fetch(origin);
 assert.equal(homepage.status, 200);
 assert.equal(homepage.headers.get('cache-control'), 'public, max-age=0, must-revalidate');

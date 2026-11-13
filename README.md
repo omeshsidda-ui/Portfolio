@@ -40,7 +40,7 @@ Hosting revalidates HTML and unversioned public files and caches Vite's hashed `
 
 The site needs no backend for its current content, section navigation, email link, or audio playback. A future contact form that sends email without opening a mail app would need server-side delivery, input validation, and abuse controls; propose that separately before adding services.
 
-Audio loads only after a visitor presses play. It still depends on the reference repository's external track; playback can fail if that host or file changes. Confirm usage rights or supply an owned/licensed replacement before a future audio release. Dela Gothic One, Inter, and JetBrains Mono are self-hosted Latin WOFF2 files from Fontsource 5.3.0, with their licenses in `public/fonts/`. Extend the font subsets if adding non-Latin content.
+The vinyl is decorative. Any future audio should use an owned or appropriately licensed track. Dela Gothic One, Inter, and JetBrains Mono are self-hosted Latin WOFF2 files from Fontsource 5.3.0, with their licenses in `public/fonts/`. Extend the font subsets if adding non-Latin content.
 
 The pinned Firebase CLI's Windows emulator did not apply source-pattern headers or redirects during review (its glob path normalization produces Windows backslashes). Use the Linux CI Hosting check for these assertions; the local Vite preview verifies the rendered app only.
 
