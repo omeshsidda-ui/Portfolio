@@ -1,46 +1,52 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Omesh Sidda | About</title>
-    <meta name="description" content="Meet Omesh Sidda, a student learning web development and exploring interface design.">
-    <meta property="og:title" content="Omesh Sidda | About">
-    <meta property="og:description" content="A little about me and what I’m learning on the web.">
-    <meta property="og:type" content="website">
-    <meta name="theme-color" content="#f8f7f2">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <div class="site">
-      <header class="site-header">
-        <a class="wordmark" href="./">Omesh Sidda</a>
-        <nav aria-label="Contact links">
-          <a href="https://github.com/omeshsidda-ui">GitHub</a>
-          <a href="mailto:omeshsidda@gmail.com">Email</a>
-        </nav>
-      </header>
-
-      <main>
-        <h1>Hi, I’m <em>Omesh</em>.</h1>
-        <section class="about" aria-labelledby="about-title">
-          <div class="about-copy">
-            <h2 id="about-title">About me</h2>
-            <p>I’m a student learning web development. I enjoy taking an idea from a rough sketch to a page I can open in a browser and share with someone.</p>
-            <p>I’m drawn to the details that make a site feel good to use, from the way type reads on a phone to how a small animation can make an interaction clearer.</p>
-            <a class="contact" href="mailto:omeshsidda@gmail.com">Say hello <span aria-hidden="true">→</span></a>
-          </div>
-          <img class="art" src="orbit.jpg" width="673" height="493" alt="">
-        </section>
-      </main>
-
-      <footer class="site-footer">
-        <span class="wordmark">Omesh Sidda</span>
-        <a href="https://github.com/omeshsidda-ui">GitHub</a>
-      </footer>
-    </div>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Omesh Sidda | Portfolio</title>
+  <meta name="description" content="Meet Omesh Sidda, a student learning web development and exploring interface design.">
+  <meta name="theme-color" content="#fff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="card.js" defer></script>
+</head>
+<body>
+  <header class="header" id="top">
+    <a class="wordmark" href="#top">Omesh Sidda</a>
+    <nav aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a class="pill" href="mailto:omeshsidda@gmail.com">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="name">
+      <h1 id="name">Omesh Sidda</h1>
+      <button type="button" class="card" aria-label="Flip profile card" aria-pressed="false" disabled>
+        <span class="card-body">
+          <span class="face front">
+            <span class="card-top"><span>Omesh Sidda</span><span>↗</span></span>
+            <span class="monogram">OS</span>
+            <span class="card-bottom"><span class="label">Student · Portfolio</span><strong>WEB<br>DEVELOPMENT</strong><span class="label">Flip card ↻</span></span>
+          </span>
+          <span class="face back">
+            <span class="card-top"><span>Profile</span><span>↻</span></span>
+            <span class="card-bottom"><span class="label">Name</span><strong>OMESH<br>SIDDA</strong><span class="label">Interests</span><span>Web development and interface design</span></span>
+          </span>
+        </span>
+      </button>
+      <a class="scroll" href="#about">Scroll<span aria-hidden="true"></span></a>
+    </section>
+    <section class="about" id="about" aria-labelledby="about-title">
+      <h2 id="about-title">I’m learning to build for the web.<span aria-hidden="true">|</span></h2>
+      <p>I’m Omesh, a student interested in web development and interface design. I like taking an idea from a rough sketch to something I can open in a browser and share.</p>
+      <a class="pill" href="mailto:omeshsidda@gmail.com">Get in touch <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+  <footer>
+    <a class="wordmark" href="#top">Omesh Sidda</a>
+    <a href="https://github.com/omeshsidda-ui">GitHub ↗</a>
+  </footer>
+</body>
 </html>
