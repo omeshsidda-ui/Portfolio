@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import CustomCursor from './CustomCursor';
+import MusicPlayer from './MusicPlayer';
 
 const skills = [
   { title: 'Web development', description: 'I build web apps and turn ideas into interfaces people can use.', icon: 'code' },
@@ -142,15 +143,7 @@ export default function HomePage() {
           </div>
 
           <div className="md:col-span-2 flex justify-center items-center mt-12 md:mt-0">
-            <div className="music-player-container profile-record">
-              <div className="vinyl-record" aria-hidden="true">
-                <div className="vinyl-label"><span className="vinyl-monogram">OS</span></div>
-              </div>
-              <div className="record-copy">
-                <p className="track-name">Omesh Sidda</p>
-                <p>Web apps · Linux servers · AI agents</p>
-              </div>
-            </div>
+            <MusicPlayer />
           </div>
 
           <div aria-hidden="true" className="absolute top-2 right-6 sm:top-12 sm:right-8 md:top-24 md:right-24 bg-white rounded-full p-0.5 sm:p-1 border border-black">
