@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://omesh-ux-portfolio-ui.web.app/sitemap.xml

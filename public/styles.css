@@ -1,0 +1,103 @@
+:root {
+  color-scheme: light;
+  --paper: #f8f7f2;
+  --ink: #171614;
+  --accent: #3020a9;
+  --display: "Instrument Serif", Georgia, serif;
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: var(--accent); text-underline-offset: .24em; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+
+.site {
+  width: min(100% - clamp(2.5rem, 8.7vw, 8.4rem), 90rem);
+  margin-inline: auto;
+}
+
+.site-header, .site-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-block: clamp(.85rem, 1.4vw, 1.35rem);
+}
+
+.site-header { border-bottom: 1px solid var(--accent); }
+.site-footer { border-top: 1px solid var(--accent); }
+.wordmark {
+  font-family: var(--display);
+  font-size: clamp(1.55rem, 2.65vw, 2.55rem);
+  line-height: 1;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+nav { display: flex; gap: clamp(1rem, 2.65vw, 2.55rem); }
+header a, footer a { text-decoration: none; }
+header a:hover, footer a:hover { text-decoration: underline; }
+
+main {
+  padding-block: clamp(2.4rem, 5.1vw, 4.9rem) clamp(2.8rem, 4.4vw, 4.2rem);
+}
+
+h1, h2 { font-family: var(--display); font-weight: 400; }
+h1 {
+  margin: 0 0 clamp(2rem, 4.55vw, 4.35rem);
+  font-size: clamp(3.9rem, 11.2vw, 10.75rem);
+  letter-spacing: -.025em;
+  line-height: .91;
+}
+
+h1 em { color: var(--accent); }
+.about {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: clamp(2rem, 3.4vw, 3.25rem);
+}
+
+h2 {
+  margin: 0 0 .48em;
+  font-size: clamp(2.2rem, 3.7vw, 3.55rem);
+  line-height: 1;
+}
+
+.about-copy p {
+  max-width: 37ch;
+  margin: 0 0 1em;
+  font-size: clamp(1rem, 1.85vw, 1.75rem);
+  line-height: 1.45;
+}
+
+.contact {
+  display: inline-block;
+  margin-top: .3em;
+  font-family: var(--display);
+  font-size: clamp(1.65rem, 2.45vw, 2.35rem);
+}
+
+.contact span { display: inline-block; margin-inline-start: .18em; transition: transform .2s ease; }
+.contact:hover span { transform: translateX(.18em); }
+.art { display: block; width: 100%; height: auto; background: #261874; }
+
+@media (max-width: 42rem) {
+  .about { grid-template-columns: 1fr; }
+  .about-copy p { max-width: 54ch; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  main { animation: appear .55s ease-out both; }
+  @keyframes appear {
+    from { opacity: 0; transform: translateY(.4rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact span { transition: none; }
+}
