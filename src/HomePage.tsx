@@ -47,17 +47,18 @@ function IndiaTime() {
   return <span className="time-display" aria-label={time ? `India time ${time}` : 'India time'}>{time || 'IST'}</span>;
 }
 
-function FloatingDock() {
-  const items = [
+const dockItems = [
     { id: 'home', label: 'Home', icon: 'home' },
     { id: 'about', label: 'About', icon: 'user' },
     { id: 'education', label: 'Education', icon: 'education' },
     { id: 'skills', label: 'Skills', icon: 'code' },
-  ];
+];
+
+function FloatingDock() {
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const sections = items
+    const sections = dockItems
       .map(({ id }) => document.getElementById(id))
       .filter((section): section is HTMLElement => section !== null);
 
@@ -84,7 +85,7 @@ function FloatingDock() {
 
   return (
     <nav aria-label="Page sections" className="floating-dock">
-      {items.map((item) => (
+      {dockItems.map((item) => (
         <a
           key={item.id}
           href={`#${item.id}`}
@@ -95,6 +96,7 @@ function FloatingDock() {
           className={`dock-icon${activeSection === item.id ? ' dock-icon-active' : ''}`}
         >
           <Symbol name={item.icon} />
+          <span className="dock-label">{item.label}</span>
         </a>
       ))}
     </nav>
@@ -104,6 +106,7 @@ function FloatingDock() {
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white text-black relative overflow-hidden">
+      <a href="#main" className="skip-link">Skip to content</a>
       <div aria-hidden="true" className="cloud-field">
         <CloudIcon className="cloud cloud-a" />
         <CloudIcon className="cloud cloud-b" />
@@ -127,7 +130,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <main className="relative z-10">
+      <main id="main" tabIndex={-1} className="relative z-10">
         <section id="home" aria-labelledby="hero-title" className="grid grid-cols-1 md:grid-cols-5 items-center px-6 sm:px-12 md:px-24 lg:px-32 min-h-[80vh] relative pt-10 sm:pt-0">
           <div className="md:col-span-3">
             <h1 id="hero-title" className="hero-title text-5xl sm:text-7xl md:text-8xl leading-[0.9] mb-4 sm:mb-6">OMESH<br />SIDDA</h1>

@@ -6,11 +6,12 @@ export default function CustomCursor() {
 
   useEffect(() => {
     const finePointer = window.matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)');
-    if (!finePointer.matches) return;
-
     const root = document.documentElement;
     const onMove = (event: PointerEvent) => {
-      if (event.pointerType === 'touch') return;
+      if (!finePointer.matches || event.pointerType === 'touch') {
+        onLeave();
+        return;
+      }
       for (const cursor of [outer.current, inner.current]) {
         if (!cursor) continue;
         cursor.style.left = `${event.clientX}px`;
@@ -19,7 +20,10 @@ export default function CustomCursor() {
       }
       root.classList.add('custom-cursor-enabled');
     };
-    const onDown = () => root.classList.add('custom-cursor-clicked');
+    const onDown = (event: PointerEvent) => {
+      if (finePointer.matches && event.pointerType !== 'touch') root.classList.add('custom-cursor-clicked');
+      else onLeave();
+    };
     const onUp = () => root.classList.remove('custom-cursor-clicked');
     const onLeave = () => {
       root.classList.remove('custom-cursor-enabled', 'custom-cursor-clicked', 'custom-cursor-hovered');
@@ -39,6 +43,8 @@ export default function CustomCursor() {
     window.addEventListener('pointerup', onUp);
     window.addEventListener('pointercancel', onUp);
     window.addEventListener('pointerleave', onLeave);
+    window.addEventListener('blur', onLeave);
+    finePointer.addEventListener('change', onLeave);
     document.addEventListener('pointerover', onOver);
     document.addEventListener('pointerout', onOut);
     return () => {
@@ -48,6 +54,8 @@ export default function CustomCursor() {
       window.removeEventListener('pointerup', onUp);
       window.removeEventListener('pointercancel', onUp);
       window.removeEventListener('pointerleave', onLeave);
+      window.removeEventListener('blur', onLeave);
+      finePointer.removeEventListener('change', onLeave);
       document.removeEventListener('pointerover', onOver);
       document.removeEventListener('pointerout', onOut);
     };
