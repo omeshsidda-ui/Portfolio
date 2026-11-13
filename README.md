@@ -6,6 +6,8 @@ Personal portfolio for Omesh Sidda, a B.Tech Computer Science and Engineering st
 - [Firebase Hosting URL](https://omesh-ux-portfolio-ui.web.app/)
 - [GitHub repository](https://github.com/omeshsidda-ui/Portfolio)
 
+For a new agent session, open the portfolio checkout and point the agent to [AGENTS.md](AGENTS.md). It explains how to find the right branch, preview changes, and continue when a plugin is unavailable.
+
 ## Local development
 
 ```sh
