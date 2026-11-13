@@ -1,7 +1,17 @@
 import React, { useRef, useState } from 'react';
+import HeroParticles from './HeroParticles';
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'motion/react';
 
 const EASE_CURVE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+const skills = [
+  { title: 'Web development', description: 'I build web apps and turn ideas into interfaces people can use.' },
+  { title: 'Headless Linux servers', description: 'I manage remote Linux servers and use AI agents to help with routine administration.' },
+  { title: 'Hermes agents', description: 'I run Hermes agents on remote servers and use them in my day-to-day workflows.' },
+  { title: 'Networking', description: 'I work with network configuration and troubleshoot connectivity.' },
+  { title: 'Reverse engineering', description: 'I study how apps work by examining their behavior and structure.' },
+  { title: 'Web scraping', description: 'I extract information from web pages and turn it into structured data.' },
+];
 
 function HeroIdCard() {
   const reducedMotion = useReducedMotion();
@@ -83,8 +93,8 @@ function HeroIdCard() {
           <div className="relative w-full h-full rounded-[20px] overflow-hidden bg-[#0a0a0a] border border-white/10">
             <div className="absolute inset-0 z-10 flex items-end justify-center group-hover:scale-[1.02] transition-transform duration-500">
               <div className="relative w-full h-full">
-                <div aria-hidden="true" className="absolute inset-0 grid place-items-center bg-[radial-gradient(ellipse_at_50%_35%,#4b4b4b,#121212_70%)] text-[clamp(5rem,16vh,10rem)] font-black tracking-tighter text-white/80">OS</div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-90" />
+                <div aria-hidden="true" className="absolute inset-0 grid place-items-center bg-neutral-800 text-[clamp(5rem,16vh,10rem)] font-black tracking-tighter text-white/80">OS</div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
               </div>
             </div>
 
@@ -145,7 +155,7 @@ function HeroIdCard() {
 
               <div>
                 <p className="text-[8px] font-mono tracking-widest text-white/40 mb-0.5 uppercase">Interests</p>
-                <p className="text-sm font-semibold text-white">Web development and interface design</p>
+                <p className="text-sm font-semibold text-white">Web apps, Linux servers, and AI agents</p>
               </div>
             </div>
           </div>
@@ -173,9 +183,9 @@ export default function HomePage() {
         id="home"
         className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pb-[120px] pt-[80px]"
       >
-        {/* Subtle Background Typography matching reference PDF */}
+        <HeroParticles />
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none overflow-hidden z-0 py-24 md:py-0">
-          <h1 className="text-[clamp(3rem,13vw,8rem)] md:text-[clamp(6rem,min(15vw,35vh),20rem)] font-black text-neutral-400/75 whitespace-nowrap tracking-tighter leading-[0.8] select-none">
+          <h1 className="text-[clamp(3rem,13vw,8rem)] md:text-[clamp(6rem,min(15vw,35vh),20rem)] font-black text-foreground/60 whitespace-nowrap tracking-tighter leading-[0.8] select-none motion-safe:animate-[pulse_3s_ease-in-out_infinite]">
             OMESH SIDDA
           </h1>
         </div>
@@ -201,7 +211,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto relative z-10 text-center">
           <h2 className="text-type text-3xl md:text-5xl lg:text-7xl font-black text-primary tracking-tight leading-[1.05] mb-10 inline-block">
             <span className="text-type__content">
-              I’m learning to build for the web.
+              I build web apps and work with Linux servers.
             </span>
             <span className="text-type__cursor">|</span>
           </h2>
@@ -213,8 +223,8 @@ export default function HomePage() {
             transition={{ duration: 0.7, ease: EASE_CURVE }}
             className="text-lg md:text-2xl lg:text-3xl font-medium text-foreground/90 leading-relaxed max-w-4xl mx-auto mb-12 md:mb-0"
           >
-            I’m Omesh, a student interested in web development and interface design.
-            I like taking ideas from a sketch to something I can open in a browser and share.
+            I’m Omesh, a first-year B.Tech student in Computer Science and Engineering at GPCET.
+            Outside class, I build web apps and experiment with AI agents on remote Linux servers.
           </motion.p>
         </div>
 
@@ -223,6 +233,31 @@ export default function HomePage() {
           </a>
       </section>
 
+      <section id="education" aria-labelledby="education-title" className="border-t border-white/10 bg-[#050505] px-6 py-16 text-white md:px-12 md:py-24">
+        <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1fr_2fr] md:gap-12">
+          <h2 id="education-title" className="text-4xl font-black tracking-tight md:text-5xl">Education</h2>
+          <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.08] to-white/[0.02] p-6 md:p-8">
+            <p className="mb-3 font-mono text-xs font-bold uppercase tracking-widest text-white/70">B.Tech · First year</p>
+            <h3 className="text-2xl font-bold tracking-tight md:text-3xl">Computer Science and Engineering</h3>
+            <p className="mt-3 text-white/70">G Pullaiah College of Engineering and Technology (GPCET), Kurnool</p>
+            <a className="mt-5 inline-block font-semibold underline underline-offset-4" href="https://www.gpcet.ac.in/cse_home/">Visit the CSE department <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" aria-labelledby="skills-title" className="border-t border-white/10 bg-[#050505] px-6 py-16 text-white md:px-12 md:py-24">
+        <div className="mx-auto max-w-6xl">
+          <h2 id="skills-title" className="mb-8 text-4xl font-black tracking-tight md:text-5xl">Skills</h2>
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {skills.map(({ title, description }) => (
+              <li key={title} className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.08] to-white/[0.02] p-6">
+                <h3 className="mb-2 text-xl font-bold tracking-tight">{title}</h3>
+                <p className="leading-relaxed text-white/70">{description}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       </main>
       <footer className="flex justify-between border-t px-6 py-6 text-sm md:px-12">
