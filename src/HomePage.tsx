@@ -67,10 +67,46 @@ function FloatingDock() {
     { id: 'education', label: 'Education', icon: 'education' },
     { id: 'skills', label: 'Skills', icon: 'code' },
   ];
+  const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    const sections = items
+      .map(({ id }) => document.getElementById(id))
+      .filter((section): section is HTMLElement => section !== null);
+
+    const updateActiveSection = () => {
+      const marker = window.innerHeight * 0.32;
+      const current = sections.find((section) => {
+        const bounds = section.getBoundingClientRect();
+        return bounds.top <= marker && bounds.bottom > marker;
+      });
+      const atPageEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+
+      if (atPageEnd && sections.length) setActiveSection(sections[sections.length - 1].id);
+      else if (current) setActiveSection(current.id);
+    };
+
+    updateActiveSection();
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('resize', updateActiveSection);
+    return () => {
+      window.removeEventListener('scroll', updateActiveSection);
+      window.removeEventListener('resize', updateActiveSection);
+    };
+  }, []);
+
   return (
     <nav aria-label="Page sections" className="floating-dock">
-      {items.map((item, index) => (
-        <a key={item.id} href={`#${item.id}`} aria-label={item.label} title={item.label} className={`dock-icon${index === 0 ? ' dock-icon-active' : ''}`}>
+      {items.map((item) => (
+        <a
+          key={item.id}
+          href={`#${item.id}`}
+          aria-label={item.label}
+          aria-current={activeSection === item.id ? 'location' : undefined}
+          title={item.label}
+          onClick={() => setActiveSection(item.id)}
+          className={`dock-icon${activeSection === item.id ? ' dock-icon-active' : ''}`}
+        >
           <Symbol name={item.icon} />
         </a>
       ))}
