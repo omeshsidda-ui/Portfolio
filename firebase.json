@@ -1,9 +1,7 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "dist",
     "ignore": ["**/.*"],
-    "redirects": [
-      { "source": "/about", "destination": "/", "type": 301 }
-    ]
+    "redirects": [{ "source": "/about", "destination": "/#about", "type": 302 }]
   }
 }
