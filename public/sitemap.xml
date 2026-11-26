@@ -2,5 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://omeshsidda.me/</loc>
+    <lastmod>2026-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://omeshsidda.me/about</loc>
+    <lastmod>2026-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://omeshsidda.me/projects/mindgraph</loc>
+    <lastmod>2026-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://omeshsidda.me/projects/pam-io</loc>
+    <lastmod>2026-11-26</lastmod>
+  </url>
+  <url>
+    <loc>https://omeshsidda.me/projects/gpcet-redesign</loc>
+    <lastmod>2026-11-26</lastmod>
   </url>
 </urlset>

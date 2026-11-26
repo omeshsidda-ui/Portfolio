@@ -1,8 +1,10 @@
 {
   "hosting": {
     "public": "dist",
+    "cleanUrls": true,
+    "trailingSlash": false,
     "ignore": ["**/.*"],
-    "redirects": [{ "source": "/about", "destination": "/#about", "type": 301 }],
+    "redirects": [{ "source": "/projects", "destination": "/#projects", "type": 301 }],
     "headers": [
       {
         "source": "**",
