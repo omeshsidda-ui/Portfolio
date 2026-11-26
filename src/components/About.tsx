@@ -1,32 +1,16 @@
-import FadeIn from './FadeIn';
+import Icon from './Icon';
 
 export default function About() {
-  return (
-    <section id="about" aria-labelledby="about-title" className="section">
-      <div className="section-inner">
-        <FadeIn>
-          <div className="about-grid">
-            <div>
-              <p className="section-kicker">About</p>
-              <h2 id="about-title" className="section-heading">
-                A little about me
-              </h2>
-            </div>
-            <div className="about-prose">
-              <p>
-                I’m Omesh Sidda, a first-year B.Tech student in Computer Science and
-                Engineering at GPCET. Outside class, I build web apps and experiment
-                with AI agents on remote Linux servers.
-              </p>
-              <p>
-                This portfolio is one of the ways I learn web development. I tested
-                the layout on my iPhone and learned how to connect my own domain to
-                Firebase Hosting.
-              </p>
-            </div>
-          </div>
-        </FadeIn>
-      </div>
-    </section>
-  );
+  return <section id="about" className="about section section-columns" aria-labelledby="about-title">
+    <div><h2 id="about-title">A little about me<span className="period" aria-hidden="true">.</span></h2>
+      <p className="about-lead">My work tends to start with a question about how something works.</p>
+      <p>Outside class, I build web apps and run Hermes agents on headless Linux servers. This portfolio took me from testing layouts on my iPhone to connecting my own domain to Firebase Hosting.</p>
+    </div>
+    <aside id="education" className="education">
+      <div className="education-label"><Icon name="book" /> Education</div>
+      <p className="degree">Computer Science<br />&amp; Engineering</p>
+      <p>First-year B.Tech student at G Pullaiah College of Engineering and Technology (GPCET), Kurnool.</p>
+      <a href="https://www.gpcet.ac.in/cse_home/" target="_blank" rel="noreferrer">CSE department <Icon name="diagonal" /></a>
+    </aside>
+  </section>;
 }

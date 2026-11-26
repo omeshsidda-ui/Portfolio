@@ -4,9 +4,7 @@ export type SymbolName =
   | 'spark'
   | 'network'
   | 'search'
-  | 'database'
-  | 'copy'
-  | 'check';
+  | 'database';
 
 export function Symbol({ name, className = 'skill-icon' }: { name: SymbolName; className?: string }) {
   const common = {
@@ -62,25 +60,6 @@ export function Symbol({ name, className = 'skill-icon' }: { name: SymbolName; c
         <svg {...common}>
           <ellipse cx="12" cy="5" rx="8" ry="3" />
           <path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" />
-        </svg>
-      );
-    case 'copy':
-      return (
-        <svg {...common}>
-          <rect x="9" y="9" width="11" height="11" rx="2" />
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-        </svg>
-      );
-    case 'check':
-      return (
-        <svg {...common}>
-          <path d="m5 12.5 4.5 4.5L19 7.5" />
-        </svg>
-      );
-    default:
-      return (
-        <svg {...common}>
-          <circle cx="12" cy="12" r="9" />
         </svg>
       );
   }

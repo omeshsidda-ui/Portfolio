@@ -1,65 +1,20 @@
-import FadeIn from './FadeIn';
 import { Symbol, type SymbolName } from './Symbol';
+import Icon from './Icon';
 
-interface Skill {
-  title: string;
-  desc: string;
-  icon: SymbolName;
-}
-
-const skills: Skill[] = [
-  {
-    title: 'Web development',
-    desc: 'I build web apps and turn ideas into interfaces people can use.',
-    icon: 'code',
-  },
-  {
-    title: 'Headless Linux servers',
-    desc: 'Managing remote Linux machines and routine workflows with AI agents.',
-    icon: 'server',
-  },
-  {
-    title: 'Hermes agents',
-    desc: 'Running autonomous Hermes agents in production day-to-day.',
-    icon: 'spark',
-  },
-  {
-    title: 'Networking',
-    desc: 'I work with network configuration and troubleshoot connectivity.',
-    icon: 'network',
-  },
-  {
-    title: 'Reverse engineering',
-    desc: 'I study how apps work by examining their behavior and structure.',
-    icon: 'search',
-  },
-  {
-    title: 'Web scraping',
-    desc: 'I extract information from web pages and turn it into structured data.',
-    icon: 'database',
-  },
+const skills: [SymbolName, string, string][] = [
+  ['code', 'Web development', 'I build browser interfaces and test how they feel on a phone.'],
+  ['server', 'Headless Linux servers', 'I manage remote Linux machines from the command line and use them to run agents.'],
+  ['spark', 'Hermes agents', 'I run Hermes agents on remote servers for day-to-day workflows.'],
+  ['network', 'Networking', 'I configure networks and trace connectivity problems.'],
+  ['search', 'Reverse engineering', 'I examine application behavior and structure to understand how software works.'],
+  ['database', 'Web scraping', 'I extract information from web pages and turn it into structured data.'],
 ];
 
 export default function Skills() {
-  return (
-    <section id="skills" aria-labelledby="skills-title" className="section">
-      <div className="section-inner">
-        <FadeIn>
-          <p className="section-kicker">Capabilities</p>
-          <h2 id="skills-title" className="section-heading">
-            Skills
-          </h2>
-          <ul className="skills-grid">
-            {skills.map(({ title, desc, icon }) => (
-              <li key={title} className="skill-cell">
-                <Symbol name={icon} className="skill-icon" />
-                <h3>{title}</h3>
-                <p>{desc}</p>
-              </li>
-            ))}
-          </ul>
-        </FadeIn>
-      </div>
-    </section>
-  );
+  return <section id="skills" className="skills section section-columns" aria-labelledby="skills-heading">
+    <h2 id="skills-heading">Capabilities<span className="period" aria-hidden="true">.</span></h2>
+    <div className="skill-list">{skills.map(([icon, name, text]) =>
+      <details key={name} name="capability"><summary><Symbol name={icon} />{name}<Icon name="plus" /></summary><p>{text}</p></details>
+    )}</div>
+  </section>;
 }
