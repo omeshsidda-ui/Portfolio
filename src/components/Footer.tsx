@@ -1,23 +1,17 @@
-import IndiaTime from './IndiaTime';
+import CopyEmail, { email } from './CopyEmail';
+import Icon from './Icon';
 
 export default function Footer() {
-  return (
-    <footer className="footer">
-      <div className="footer-inner">
-        <p className="footer-info">
-          Omesh Sidda · Kurnool, India · <IndiaTime />
-        </p>
-        <div className="footer-links">
-          <a href="mailto:omeshsidda@gmail.com">omeshsidda@gmail.com</a>
-          <a
-            href="https://github.com/omeshsidda-ui"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub <span aria-hidden="true">↗</span>
-          </a>
+  return <footer id="contact" className="shell">
+    <div className="contact">
+      <h2>Get in touch<span className="period" aria-hidden="true">.</span></h2>
+      <div className="contact-row">
+        <a className="email" href={'mailto:' + email}>{email}<Icon name="diagonal" /></a>
+        <div className="contact-links">
+          <CopyEmail /><a href="https://github.com/omeshsidda-ui" target="_blank" rel="noreferrer">GitHub <Icon name="diagonal" /></a>
         </div>
       </div>
-    </footer>
-  );
+    </div>
+    <div className="colophon"><span><Icon name="wave" /> Omesh Sidda</span><a href="#home">Back to top ↑</a></div>
+  </footer>;
 }
