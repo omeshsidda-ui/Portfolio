@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { getProjectByPath } from '../data/projects';
+import { Link, useRouter } from '../router';
 import Icon from './Icon';
 
 type Theme = 'light' | 'dark';
@@ -36,10 +38,16 @@ function ThemeSwitch() {
 }
 
 export default function Header() {
-  return <header className="header shell">
-    <a className="brand" href="#home"><Icon name="wave" /><strong>Omesh Sidda</strong><span>/</span><i>Workbench</i></a>
-    <nav className="section-nav" aria-label="Page sections">
-      <a href="#projects">Work</a><a href="#about">About</a><a href="#contact">Contact</a>
+  const { path } = useRouter();
+  const isWorkActive = Boolean(getProjectByPath(path));
+  const isAboutActive = path === '/about';
+
+  return <header id="top" className="header shell">
+    <Link className="brand" href="/"><Icon name="wave" /><strong>Omesh Sidda</strong><span>/</span><i>Workbench</i></Link>
+    <nav className="section-nav" aria-label="Primary">
+      <Link href="/#projects" className={isWorkActive ? 'active' : undefined}>Work</Link>
+      <Link href="/about" aria-current={isAboutActive ? 'page' : undefined} className={isAboutActive ? 'active' : undefined}>About</Link>
+      <a href="#contact">Contact</a>
     </nav>
     <ThemeSwitch />
   </header>;
